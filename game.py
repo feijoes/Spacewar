@@ -1,12 +1,6 @@
 import turtle
-import os
 import random
-#from tkinter import *
-#from PIL import ImageTk,Image
-
-
 from tkinter import *
-from PIL import ImageTk, Image
 
 turtle.fd(0)
 turtle.speed(0) 
@@ -25,8 +19,6 @@ class Sprite(turtle.Turtle):
         self.fd(0)
         self.goto(startx, starty)
         self.speed = 1
-
-
     def move(self):
         self.fd(self.speed)
         if self.xcor() > 290:
@@ -71,7 +63,7 @@ class Player(Sprite):
 class amigo(Sprite):
     def __init__(self, spriteshape, color, startx, starty):
         Sprite.__init__(self, spriteshape, color, startx, starty)
-        self.speed = 8
+        self.speed = 5
         self.setheading(random.randint(0,360))
     def move(self):
         self.fd(self.speed)
@@ -106,17 +98,12 @@ class Misil(Sprite):
             self.goto(P.xcor(), P.ycor())
             self.setheading(P.heading())
             self.status = 'atirando'
-            
-            
-     def movi(self):
-        
+
+     def movi(self):   
         if self.status == 'ready':
             self.goto(-1000,1000)
-
-
         if self.status == 'atirando':
             self.fd(self.speed)
-        
         if self.xcor() < -290 or self.xcor() > 290 or self.ycor() < -290 or \
         self.ycor() > 290:
             self.status = 'ready'
@@ -127,8 +114,7 @@ class Game():
        self.level = 1
        self.score = 0
        self.state = "Jogando"
-       self.pen = turtle.Turtle()
-       
+       self.pen = turtle.Turtle()       
      def borda(self):
         self.pen.speed(0)
         self.pen.color("white")
@@ -142,15 +128,13 @@ class Game():
         self.pen.penup()
         self.pen.ht()
         self.pen.pendown()
-
      def Score(self):
          self.pen.undo()
          msg = "Score: %s" %(self.score)
          self.pen.penup()
          self.pen.goto(-300,310)
          self.pen.write(msg, font=('Aria',16,'normal'))
-
-game =Game()
+game = Game()
 game.borda()
 game.Score()
 P = Player(spriteshape="triangle", color='white', startx=0, starty=0)
